@@ -1,0 +1,6 @@
+{
+	"theme" : {
+		"primary-color": "#1abc9c"
+	},
+	"theme": "./src/common/theme.less"
+}

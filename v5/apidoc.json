@@ -1,0 +1,12 @@
+{
+  "name": "{{name}}",
+  "version": "1.0.0",
+  "description": "{{name}}项目api文档",
+  "title": "{{name}}项目api文档",
+  "url" : "{{apiUrl}}",
+  "sampleUrl": "{{apiUrl}}",
+  "template": {
+      "withCompare": true,
+      "withGenerator": true
+  }
+}

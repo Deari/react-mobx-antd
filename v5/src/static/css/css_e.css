@@ -1,0 +1,65 @@
+div,form,img,ul,ol,li,dl,dt,dd {margin: 0; padding: 0; border: 0; }
+li{list-style-type:none;}
+#header{ width:100%; margin-right: auto; margin-left: auto; padding: 0; background: white; height:auto; text-align:left; border-bottom: 3px solid #950000; } 
+#contain{ width: 980px; height: auto; margin: 5px auto 0; } 
+#footer{ clear:both; width:100%; margin-right: auto; margin-left: auto; padding: 0; background: white; height:80px;  border-top: 3px solid #b2bacb; } 
+a:link {color: #3b5998; text-decoration:none;}
+a:visited {color: #3b5998;text-decoration:none;}
+a:hover {color: #39f; text-decoration:underline;}
+a:active {color: #3b5998;}
+.cRed,a.cRed:link,a.cRed:visited{ color:#f00; }
+.cDGray,a.cDGray:link,a.cDGray:visited{ color: #666;}
+.cBlue,a.cBlue:link,a.cBlue:visited,a.cBlue:active{color:#1f3a87;text-decoration:underline;}
+.fB {font-weight: bold;}
+.f14{ font-size: 14px; }
+#bom{ color: #6a6a6a; line-height: 24px; text-align: center; width: 100%; margin-top: 15px; }
+#bom a{color:#626262;}
+#bom a:hover{color:#bc2931;}
+.colcont_head { width: 980px; height:75px ; margin-right: auto; margin-left: auto; padding: 0; }
+
+a.head_link:link { font-weight: bold; color: #991b1e;font-size: 14px;  }
+a.head_link:visited{font-weight: bold; color: #991b1e;font-size: 14px; }
+a.head_link:hover { font-weight: bold; color: #b5b5b5;font-size: 14px;text-decoration:none; }
+
+.leftright{ padding-bottom: 5px; border-right: 1px solid #ddd; border-left: 1px solid #ddd; }
+.f12white{ color: white; font-weight: bold; }
+.bian{ margin-top: 15px; margin-left: 20px; border: solid 1px silver; }
+
+.f14white{ color: #ffffff; font-size: 14px; font-weight: bold; }
+.diao_1{ color: black; font-weight: bold; line-height: 23px; background-image: url(//concat.lietou-static.com/pics/pc/images/6.0/diao_1_09.gif); text-align: center; vertical-align: middle; width: 122px; height: 23px; }
+.diao_2{ color: #3b5998; line-height: 23px; background-image: url(//concat.lietou-static.com/pics/pc/images/6.0/diao_1_10.gif); text-align: center; vertical-align: middle; width: 122px; height: 23px; }
+body {background: #e6e6e6;text-align: center;color: #272626;font-size: 12px;font-family: 宋体;}
+
+.text_cu {font-size: 12px;font-weight: bold;color: #000000; line-height: 18px;}
+.red {font-size: 14px;  color: #FF0000;}
+.f22ge{ color: #333; line-height: 24px; }
+.f20ge{ color: #333; line-height: 22px; }
+.new_tel {font-size: 16px;font-weight: bold;color: #002475;}
+.new_tel a{ font-size: 16px;  font-weight: bold;  color: #002475;}
+.new_tel a:hover{color: #39f; text-decoration:underline;}
+.new_text { font-size: 12px;  color: #000000;}
+.new_text a{ /*IE only hack*/ color: #000000; text-decoration: underline;}
+.new_text a:hover{ /*THEME CHANGE HERE*/  color: #FF0000;}
+.new_tel2 { font-size: 14px;  color: #000000; font-weight: bold;}
+.new_tel2 a {font-size: 14px;  color: #002164;  text-decoration: none;  list-style-type: upper-alpha;}
+.new_tel2 a:hover {  color: #f00;}
+
+.navbox_1207_1 { color: #5e5e5e; line-height: 22px; width:90%; height:auto ; float: left; padding-left: 30px; }
+.navbox_1207_2 { color: #323232; width:90%; height:20px ; float: left; padding-left: 30px; }
+
+.navbox_1207_4 { text-align: left; color: #5e5e5e; line-height: 22px; width:20px; height:40px; float: left; padding-left: 30px;padding-top: 20px;vertical-align:middle;}
+.navbox_1207_5 { text-align: left; color: #5e5e5e; line-height: 22px; width:150px; height:40px; float: left; padding-top: 20px;vertical-align:middle;}
+.hj_1{ text-align: right; width: 100%; float: left;}
+.navbox_1207 { color: #272727; font-weight: bold; width:90%; line-height:20px   ; float: left; padding-top: 5px; padding-left: 30px; }
+.navbox_1207_smallone { color: #272727; font-weight: bold; background-image: url(//concat.lietou-static.com/pics/pc/images/6.0/smallone.gif); background-repeat: no-repeat; background-position: 0px 0px; width:90%; line-height:20px; float: left; padding-top: 5px; padding-left: 30px; }
+.ti_2{ color: #535353; border-right: 1px solid white; }
+
+#right_bo_1{ float: right; margin: 2px 0 8px 2px; padding:0; width: 100%; background: white; text-align:left; border-top: 1px solid #c0c0c0; border-bottom: 1px solid silver; }
+.f22ge{ color: #333; line-height: 24px; } 
+.org_1{ background-color: #f6f9ff; }
+.f14red{ color: #991b1e; font-size: 14px; font-weight: bold; }
+.xuxian {
+  border-bottom-width: 1px;
+  border-bottom-style: dashed;
+  border-bottom-color: #a5a5a5;
+}

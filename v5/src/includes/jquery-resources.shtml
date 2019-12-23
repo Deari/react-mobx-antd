@@ -1,0 +1,16 @@
+<!-- <%@ page pageEncoding="utf-8"%> -->
+<meta name="renderer" content="webkit"><!-- 使360浏览器 默认启用极速内核 -->
+<link rel="icon" href="//concat.lietou-static.com/fe-rpo-pc/v5/static/favicon.ico" type="image/x-icon" />
+<link rel="dns-prefetch" href="//concat.lietou-static.com" />
+<script src="//concat.lietou-static.com/fe-rpo-pc/v5/static/js/loader.js"></script>
+<!--[if lt IE 9]>
+<script src="//concat.lietou-static.com/fe-rpo-pc/v5/static/js/html5shiv.js"></script>
+<script src="//concat.lietou-static.com/fe-rpo-pc/v5/static/js/globals.js"></script>
+<![endif]-->
+<script>
+FeLoader.get(
+  '//concat.lietou-static.com/fe-rpo-pc/v5/static/js/jquery-1.7.1.min.js',
+  '//concat.lietou-static.com/fe-rpo-pc/v5/js/common/common.js',
+  '//concat.lietou-static.com/fe-rpo-pc/v5/css/common/common.css'
+);
+</script>
