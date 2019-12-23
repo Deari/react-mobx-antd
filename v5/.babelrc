@@ -37,5 +37,33 @@
         "style": true
       }
     ]
-  ]
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "browsers": [
+                // 浏览器
+                "last 2 versions",
+                "ie >= 10"
+              ],
+              "node": "current" // node
+            }
+          }
+        ],
+        "@babel/preset-react"
+      ],
+      "plugins": [
+        [
+          "babel-plugin-transform-require-ignore",
+          {
+            "extensions": [".less", ".sass"]
+          }
+        ]
+      ]
+    }
+  }
 }
