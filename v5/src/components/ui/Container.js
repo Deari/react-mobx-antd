@@ -8,7 +8,7 @@ const Container = WrappedComponent => {
   @observer
   class RefsHOC extends React.Component {
     render() {
-      return <WrappedComponent {...props} />;
+      return <WrappedComponent {...this.props} />;
     }
   }
   return RefsHOC;
