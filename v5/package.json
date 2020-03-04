@@ -8,7 +8,7 @@
     "build:dll:min": "NODE_ENV=production webpack --config ./config/webpack-config/dll.config.js -p",
     "build:dev": "webpack --config ./config/webpack.dev.js --watch",
     "build:prd": "node ./config/transferAsset-git.js",
-    "build:doc": "apidoc -i src/stores/ -o apidoc/",
+    "build:doc": "apidoc -i src/service/ -o apidoc/",
     "check:modules": "node ./config/webpack-config/checkVersion.js",
     "isSkipPackage": "node ./config/webpack-config/checkBeforeCompile.js",
     "start": "DEBUG=true npm-run-all isSkipPackage  build:dll build:server",
