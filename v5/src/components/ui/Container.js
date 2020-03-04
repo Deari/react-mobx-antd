@@ -1,17 +1,12 @@
-import React, { Component } from 'react';
-import { Menu, Icon, Row, Col } from 'antd';
-import { inject, observer, PropTypes as MobxPropTypes } from 'mobx-react';
-import { Link } from 'react-router-dom';
+import { inject, observer } from 'mobx-react';
+import React from 'react';
 
 const Container = (WrappedComponent) => {
-  @inject('appStore')
-  @observer
-  class RefsHOC extends React.Component {
-    render() {
-      return <WrappedComponent {...this.props} />;
-    }
-  }
-  return RefsHOC;
+  return inject('appStore')(
+    observer((props) => {
+      return <WrappedComponent {...props} />;
+    }),
+  );
 };
 
 export default Container;

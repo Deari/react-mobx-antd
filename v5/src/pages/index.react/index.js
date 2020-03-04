@@ -1,35 +1,21 @@
-import './index.less';
-
-import React from 'react';
-import ReactDOM from 'react-dom';
-
+import { ConfigProvider } from 'antd';
+import zhCN from 'antd/es/locale/zh_CN';
 import { configure } from 'mobx';
 import { Provider } from 'mobx-react';
-
-import { Router } from 'react-router';
-
-import stores from '../../stores';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { browserHistory, Router } from 'react-router';
 import routes from '../../routes';
+import stores from '../../stores';
+import './index.less';
 
-configure({ enforceActions: true });
-
-function hashLinkScroll() {
-  const { hash } = window.location;
-  if (hash !== '') {
-    // Push onto callback queue so it runs after the DOM is updated,
-    // this is required when navigating from a different page so that
-    // the element is rendered on the page before trying to getElementById.
-    setTimeout(() => {
-      const id = hash.replace('#', '');
-      const element = document.getElementById(id);
-      element && element.click(); // TODO
-    }, 0);
-  }
-}
+configure({ enforceActions: 'observed' });
 
 ReactDOM.render(
   <Provider {...stores}>
-    <Router routes={routes} onUpdate={hashLinkScroll} />
+    <ConfigProvider locale={zhCN}>
+      <Router history={browserHistory} routes={routes} />
+    </ConfigProvider>
   </Provider>,
   document.getElementById('{{name}}'),
 );
