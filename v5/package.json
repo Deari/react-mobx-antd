@@ -1,5 +1,5 @@
 {
-  "name": "fe-demo-pc",
+  "name": "{{name}}",
   "version": "1.0.0",
   "description": "{{description}}",
   "main": "index.js",
