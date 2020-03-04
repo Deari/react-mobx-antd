@@ -4,10 +4,10 @@ export default {
   getComponent(nextState, cb) {
     require.ensure(
       [],
-      require => {
-        cb(null, require('../../views/NoMatch').default);
+      (require) => {
+        cb(null, require('@/views/NoMatch').default);
       },
-      'NotFound'
+      'NotFound',
     );
-  }
+  },
 };

@@ -7,16 +7,20 @@ const glob = require('glob');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 const config = require('./webpack-config/dir.config');
 
 process.env.BABEL_ENV = 'development';
 process.env.NODE_ENV = 'development';
 
+const smp = new SpeedMeasurePlugin();
+
 //less-loader
 const getLessLoader = require('./webpack-config/less.loader')();
 
 let entrys = {
-  'common/vendors': ['mobx', 'mobx-react']
+  'common/vendors': ['mobx', 'mobx-react'],
 };
 /* 入口 */
 
@@ -30,9 +34,8 @@ fsPath.remove(path.join(config.devPath, '../'), () => {
 
 // 遍历入口文件
 const files = require('./webpack-config/entrys.config');
-const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
 
-files.forEach(v => {
+files.forEach((v) => {
   let name = v
     .replace(config.contextPath, '')
     .replace(/\/index\.js$/, '')
@@ -40,7 +43,6 @@ files.forEach(v => {
   name = name.replace(/^\/+/, '');
   name = name.replace(/common\/js/g, 'common'); //common/js 处理
   name = name.replace(/common$/g, 'common/common'); //common 处理
-  // entrys[name] = [v, hotMiddlewareScript];
   entrys[name] = v;
 
   // 插件配置 html导出路径设置
@@ -52,12 +54,13 @@ files.forEach(v => {
         filename: html,
         publicPath: config.publicPath,
         template: v.replace('.js', '.html'),
-        inject: false
-      })
+        inject: false,
+      }),
     );
   }
 });
 
+plugins.push(new ProgressBarPlugin());
 plugins = plugins.concat(require('./webpack-config/plugin.base'));
 // copy includes
 plugins.push(
@@ -65,9 +68,9 @@ plugins.push(
     {
       from: path.join(config.contextPath, 'includes'),
       to: path.join(config.devPath, 'html/includes/[name].[ext]'),
-      ignore: ['.*']
-    }
-  ])
+      ignore: ['.*'],
+    },
+  ]),
 );
 // copy static
 plugins.push(
@@ -75,9 +78,9 @@ plugins.push(
     {
       from: path.join(config.contextPath, 'static'),
       to: path.join(config.devPath, 'static/[path][name].[ext]'),
-      ignore: ['.*']
-    }
-  ])
+      ignore: ['.*'],
+    },
+  ]),
 );
 
 // cdn 回源机制
@@ -92,8 +95,8 @@ plugins.push(
   new ExtractTextPlugin({
     filename(getPath) {
       return getPath('css/[name].css').replace('.js', '');
-    }
-  })
+    },
+  }),
 );
 
 //开启happypack的线程池加速代码构建
@@ -108,8 +111,8 @@ plugins.push(
     loaders: [
       {
         loader: 'babel-loader',
-        exclude: config.exclude
-      }
+        exclude: config.exclude,
+      },
       // {
       //   options: {
       //     formatter: eslintFormatter,
@@ -127,8 +130,8 @@ plugins.push(
     ],
     threadPool: happyThreadPool,
     cache: true,
-    verbose: true
-  })
+    verbose: true,
+  }),
 );
 
 // plugins.push(
@@ -141,9 +144,10 @@ const exportConfig = {
     path: config.devPath,
     filename: 'js/[name].js',
     chunkFilename: 'js/react/[name].chunk.js',
-    publicPath: config.publicPath
+    publicPath: config.publicPath,
   },
   devtool: 'inline-source-map',
+  stats: 'errors-only',
   module: {
     strictExportPresence: true,
     noParse: [/moment.js/],
@@ -176,58 +180,79 @@ const exportConfig = {
                 }
                 subName = subName.replace(/\/{2,}/g, '/');
                 return `${subName}.[ext]`;
-              }
-            }
-          }
-        ]
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.tpl$/,
         exclude: config.exclude,
         use: [
           {
-            loader: 'babel-loader'
+            loader: 'babel-loader',
           },
-          // {
-          //   loader: 'eslint-loader',
-          // },
           {
-            loader: 'nodetpl-loader'
-          }
-        ]
+            loader: 'nodetpl-loader',
+          },
+        ],
       },
       {
         test: /\.(css)$/,
-        loader: 'style-loader!css-loader'
+        loader: 'style-loader!css-loader',
       },
       {
         test: /\.(less)$/,
         exclude: config.exclude,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: getLessLoader
-        })
+          use: getLessLoader,
+        }),
       },
       {
         test: /\.js[x]?$/,
-        loaders: ['happypack/loader?id=happybabel']
-      }
-    ]
+        loaders: ['happypack/loader?id=happybabel'],
+      },
+    ],
   },
   resolve: {
     extensions: ['.js', '.json', '.tpl', '.jsx'] /* 自动扩展文件后缀名，意味着我们require模块可以省略不写后缀名 */,
     alias: {
-      '@business': config.contextPath + '/components/business',
-      '@ui': config.contextPath + '/components/ui'
-    } /* 勿删  模块别名定义，方便后续直接引用别名，无须多写长长的地址 */
-    // enforceExtension: false
+      '@/business': config.contextPath + '/components/business',
+      '@/ui': config.contextPath + '/components/ui',
+      '@/services': config.contextPath + '/services',
+      '@/views': config.contextPath + '/views',
+      '@/routes/_util': config.contextPath + '/routes/_util',
+    },
   },
-  // externals: [{
-  //   react: 'React',
-  //   'react-dom': 'ReactDOM',
-  //   antd: 'antd',
-  // }],
-  plugins: plugins
+  plugins: plugins,
+  // optimization: {
+  //   splitChunks: {
+  //     cacheGroups: {
+  //       commons: {
+  //         test: /[\\/]node_modules[\\/]/,
+  //         name: 'common/vendors',
+  //         chunks(chunk) {
+  //           return /^(pages|common)[\\/]/.test(chunk.name) && chunk.name != 'pages/sunshine';
+  //         },
+  //         minChunks: 2,
+  //         priority: 20,
+  //       },
+  //       commonReact: {
+  //         test(module, chunks) {
+  //           let chunkName = chunks.map((v) => v.name);
+  //           return chunkName[0] == 'pages/sunshine' && /[\\/]node_modules[\\/]/.test(module.context);
+  //         },
+  //         name: 'common/common-react',
+  //         chunks(chunk) {
+  //           return (chunk.name = 'pages/sunshine');
+  //         },
+  //         minChunks: 1,
+  //         priority: 10,
+  //       },
+  //     },
+  //   },
+  // },
 };
 
-module.exports = exportConfig;
+module.exports = smp.wrap(exportConfig);

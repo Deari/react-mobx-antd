@@ -1,29 +1,30 @@
-/**
- * Created  17/10/20.
- */
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const MapWebpackPlugin = require('./plugins/map-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 const config = require('./webpack-config/dir.config');
 
 process.env.BABEL_ENV = 'production';
 process.env.NODE_ENV = 'production';
 
+const smp = new SpeedMeasurePlugin();
+
 // less-loader
 const getLessLoader = require('./webpack-config/less.loader')(true);
 
-let entrys = {
-  'common/vendors': ['mobx', 'mobx-react']
+let entry = {
+  'common/vendors': ['mobx', 'mobx-react'],
 };
 /* 入口 */
 
 let plugins = [
   new webpack.SourceMapDevToolPlugin({
     filename: '../sourcemap/' + config.version + '/[file].map', //存放为上层路径，接收相对路径
-    append:false // 去除js文件中末尾注释
-  })
+    append: false, // 去除js文件中末尾注释
+  }),
 ];
 /* 插件 */
 
@@ -35,7 +36,7 @@ fsPath.remove(path.join(config.prdPath, '../'), () => {
 // 遍历入口文件
 const files = require('./webpack-config/entrys.config');
 
-files.forEach(v => {
+files.forEach((v) => {
   let name = v
     .replace(config.contextPath, '')
     .replace(/\/index\.js$/, '')
@@ -43,7 +44,7 @@ files.forEach(v => {
   name = name.replace(/^\/+/, '');
   name = name.replace(/common\/js/g, 'common'); //common/js 处理
   name = name.replace(/common$/g, 'common/common'); //common 处理
-  entrys[name] = v;
+  entry[name] = v;
 });
 
 plugins = plugins.concat(require('./webpack-config/plugin.base'));
@@ -53,28 +54,22 @@ plugins.push(
     {
       from: path.join(config.contextPath, 'static'),
       to: path.join(config.prdPath, 'static/[path][name].[hash:8].[ext]'),
-      ignore: ['.*']
-    }
-  ])
+      ignore: ['.*'],
+    },
+  ]),
 );
 
-// cdn 回源机制
-// plugins.push(new CopyWebpackPlugin([
-//   {
-//     from: path.join(config.contextPath, './cdntest.png'),
-//     to: path.join(config.prdPath, './cdntest.png'),
-//   },
-// ]));
+plugins.push(new ProgressBarPlugin());
 
 // webpack 压缩打包
-plugins.push(new webpack.optimize.UglifyJsPlugin({sourceMap: true, exclude: /\.min\.js$/ }));
+plugins.push(new webpack.optimize.UglifyJsPlugin({ sourceMap: true, exclude: /\.min\.js$/ }));
 
 plugins.push(
   new ExtractTextPlugin({
     filename(getPath) {
       return getPath('css/[name].[contenthash:8].css');
-    }
-  })
+    },
+  }),
 );
 
 // 插件配置 生成版本map  error?????
@@ -82,12 +77,12 @@ plugins.push(new MapWebpackPlugin({ targetFile: '../map.json' }));
 plugins.push(new webpack.HashedModuleIdsPlugin());
 
 const exportConfig = {
-  entry: entrys,
+  entry: entry,
   output: {
     path: config.prdPath,
     filename: 'js/[name].[chunkhash:8].js',
     chunkFilename: 'js/react/[name].[chunkhash:8].js',
-    publicPath: config.publicPath
+    publicPath: config.publicPath,
   },
 
   module: {
@@ -119,30 +114,30 @@ const exportConfig = {
                 }
                 subName = subName.replace(/\/+/g, '/');
                 return `${subName}.[hash:8].[ext]`;
-              }
-            }
-          }
-        ]
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.tpl$/,
         exclude: config.exclude,
         use: [
           {
-            loader: 'babel-loader'
+            loader: 'babel-loader',
           },
           {
-            loader: 'nodetpl-loader'
-          }
-        ]
+            loader: 'nodetpl-loader',
+          },
+        ],
       },
       {
         test: /\.(less|css)$/,
         exclude: config.exclude,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: getLessLoader
-        })
+          use: getLessLoader,
+        }),
       },
       {
         test: /\.js[x]?$/,
@@ -150,28 +145,23 @@ const exportConfig = {
         exclude: config.exclude,
         use: [
           {
-            loader: 'babel-loader'
-          }
-        ]
-      }
-    ]
+            loader: 'babel-loader',
+          },
+        ],
+      },
+    ],
   },
   resolve: {
-    extensions: ['.js', '.json', '.tpl', '.jsx'], // 自动扩展文件后缀名，意味着我们require模块可以省略不写后缀名
+    extensions: ['.js', '.json', '.tpl', '.jsx'] /* 自动扩展文件后缀名，意味着我们require模块可以省略不写后缀名 */,
     alias: {
-      '@business': config.contextPath + '/components/business',
-      '@ui': config.contextPath + '/components/ui'
-    } // 勿删  模块别名定义，方便后续直接引用别名，无须多写长长的地址
-    // enforceExtension: false
+      '@/business': config.contextPath + '/components/business',
+      '@/ui': config.contextPath + '/components/ui',
+      '@/services': config.contextPath + '/services',
+      '@/views': config.contextPath + '/views',
+      '@/routes/_util': config.contextPath + '/routes/_util',
+    },
   },
-  // externals: [
-  //   {
-  //     react: 'React',
-  //     'react-dom': 'ReactDOM',
-  //     antd: 'antd'
-  //   }
-  // ],
-  plugins: plugins
+  plugins: plugins,
 };
 
-module.exports = exportConfig;
+module.exports = smp.wrap(exportConfig);

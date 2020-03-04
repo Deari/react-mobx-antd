@@ -23,10 +23,6 @@ src/fonts/build
 
 src/common/index.css
 
-yarn.lock
-
-package-lock.json
-
 apidoc
 
 src/static/js/lib.js

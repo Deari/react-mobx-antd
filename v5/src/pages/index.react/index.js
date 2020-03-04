@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import { configure } from 'mobx';
 import { Provider } from 'mobx-react';
 
-import { Router, browserHistory } from 'react-router';
+import { Router } from 'react-router';
 
 import stores from '../../stores';
 import routes from '../../routes';
@@ -29,7 +29,7 @@ function hashLinkScroll() {
 
 ReactDOM.render(
   <Provider {...stores}>
-    <Router history={browserHistory} routes={routes} onUpdate={hashLinkScroll} />
+    <Router routes={routes} onUpdate={hashLinkScroll} />
   </Provider>,
-  document.getElementById('{{name}}')
+  document.getElementById('{{name}}'),
 );
