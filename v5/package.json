@@ -1,5 +1,5 @@
 {
-  "name": "{{name}}",
+  "name": "fe-demo-pc",
   "version": "1.0.0",
   "description": "{{description}}",
   "main": "index.js",
@@ -62,7 +62,6 @@
     "copy-webpack-plugin": "^4.2.0",
     "css-loader": "^0.28.7",
     "enzyme": "^3.7.0",
-    "enzyme-adapter-react-15": "^1.1.1",
     "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "^4.12.0",
     "eslint-config-react-app": "^2.0.1",

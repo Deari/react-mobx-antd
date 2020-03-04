@@ -3431,20 +3431,9 @@ env-variable@0.0.x:
   resolved "https://registry.npm.taobao.org/env-variable/download/env-variable-0.0.6.tgz#74ab20b3786c545b62b4a4813ab8cf22726c9808"
   integrity sha1-dKsgs3hsVFtitKSBOrjPInJsmAg=
 
-enzyme-adapter-react-15@^1.1.1:
-  version "1.4.1"
-  resolved "https://registry.npm.taobao.org/enzyme-adapter-react-15/download/enzyme-adapter-react-15-1.4.1.tgz#879f730a31db7ffb593cb0c0d25dd4791764eabc"
-  integrity sha1-h59zCjHbf/tZPLDA0l3UeRdk6rw=
-  dependencies:
-    enzyme-adapter-utils "^1.12.1"
-    object.assign "^4.1.0"
-    object.values "^1.1.0"
-    prop-types "^15.7.2"
-    react-is "^16.10.2"
-
 enzyme-adapter-react-16@^1.15.2:
   version "1.15.2"
-  resolved "https://registry.npm.taobao.org/enzyme-adapter-react-16/download/enzyme-adapter-react-16-1.15.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fenzyme-adapter-react-16%2Fdownload%2Fenzyme-adapter-react-16-1.15.2.tgz#b16db2f0ea424d58a808f9df86ab6212895a4501"
+  resolved "https://registry.npm.taobao.org/enzyme-adapter-react-16/download/enzyme-adapter-react-16-1.15.2.tgz?cache=0&sync_timestamp=1576800893519&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fenzyme-adapter-react-16%2Fdownload%2Fenzyme-adapter-react-16-1.15.2.tgz#b16db2f0ea424d58a808f9df86ab6212895a4501"
   integrity sha1-sW2y8OpCTVioCPnfhqtiEolaRQE=
   dependencies:
     enzyme-adapter-utils "^1.13.0"
@@ -3457,7 +3446,7 @@ enzyme-adapter-react-16@^1.15.2:
     react-test-renderer "^16.0.0-0"
     semver "^5.7.0"
 
-enzyme-adapter-utils@^1.12.1, enzyme-adapter-utils@^1.13.0:
+enzyme-adapter-utils@^1.13.0:
   version "1.13.0"
   resolved "https://registry.npm.taobao.org/enzyme-adapter-utils/download/enzyme-adapter-utils-1.13.0.tgz#01c885dde2114b4690bf741f8dc94cee3060eb78"
   integrity sha1-AciF3eIRS0aQv3QfjclM7jBg63g=
@@ -8516,7 +8505,7 @@ react-error-overlay@^3.0.0:
   resolved "https://registry.npm.taobao.org/react-error-overlay/download/react-error-overlay-3.0.0.tgz#c2bc8f4d91f1375b3dad6d75265d51cd5eeaf655"
   integrity sha1-wryPTZHxN1s9rW11Jl1RzV7q9lU=
 
-react-is@^16.10.2, react-is@^16.12.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6, react-is@^16.9.0:
+react-is@^16.12.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6, react-is@^16.9.0:
   version "16.13.0"
   resolved "https://registry.npm.taobao.org/react-is/download/react-is-16.13.0.tgz#0f37c3613c34fe6b37cd7f763a0d6293ab15c527"
   integrity sha1-DzfDYTw0/ms3zX92Og1ik6sVxSc=

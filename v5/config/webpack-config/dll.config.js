@@ -9,37 +9,43 @@ const config = require('./dir.config');
 
 const vendors = ['react', 'react-dom', 'react-router', 'prop-types', 'antd'];
 
+let plugins = [
+  new webpack.DllPlugin({
+    path: './src/static/js/manifest.json',
+    name: '[name]',
+    context: __dirname,
+  }),
+  new HappyPack({
+    id: 'happybabel',
+    loaders: [
+      {
+        loader: 'babel-loader',
+      },
+    ],
+    threadPool: happyThreadPool,
+    cache: true,
+    verbose: true,
+  }),
+  new ExtractTextPlugin({
+    filename: 'css/[name].css',
+    allChunks: true,
+  }),
+];
+
+if (process.env.NODE_ENV === 'production') {
+  plugins.push(new webpack.optimize.UglifyJsPlugin({ exclude: /\.min\.js$/ }));
+}
+
 module.exports = {
   output: {
     path: path.join(__dirname.replace('config/webpack-config', '/src/static')),
     filename: 'js/[name].js',
-    library: '[name]'
+    library: '[name]',
   },
   entry: {
-    lib: vendors
+    lib: vendors,
   },
-  plugins: [
-    new webpack.DllPlugin({
-      path: './src/static/js/manifest.json',
-      name: '[name]',
-      context: __dirname
-    }),
-    new HappyPack({
-      id: 'happybabel',
-      loaders: [
-        {
-          loader: 'babel-loader'
-        }
-      ],
-      threadPool: happyThreadPool,
-      cache: true,
-      verbose: true
-    }),
-    new ExtractTextPlugin({
-      filename: 'css/[name].css',
-      allChunks: true
-    })
-  ],
+  plugins: plugins,
   module: {
     strictExportPresence: true,
     noParse: [/moment.js/],
@@ -71,29 +77,29 @@ module.exports = {
                 }
                 subName = subName.replace(/\/{2,}/g, '/');
                 return `${subName}.[ext]`;
-              }
-            }
-          }
-        ]
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.(css)$/,
-        loader: 'style-loader!css-loader'
+        loader: 'style-loader!css-loader',
       },
       {
         test: /\.(less|css)$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: getLessLoader
-        })
+          use: getLessLoader,
+        }),
       },
       {
         test: /\.js[x]?$/,
-        loaders: ['happypack/loader?id=happybabel']
-      }
-    ]
+        loaders: ['happypack/loader?id=happybabel'],
+      },
+    ],
   },
   resolve: {
-    extensions: ['.js', '.json', '.tpl', '.jsx'] /* 自动扩展文件后缀名，意味着我们require模块可以省略不写后缀名 */
-  }
+    extensions: ['.js', '.json', '.tpl', '.jsx'] /* 自动扩展文件后缀名，意味着我们require模块可以省略不写后缀名 */,
+  },
 };
