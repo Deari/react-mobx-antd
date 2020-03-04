@@ -17,7 +17,7 @@ npm-debug.log.*
 JSON
 JSON.map
 
-# src/fonts/*.*
+src/fonts/*.*
 
 src/fonts/build
 
