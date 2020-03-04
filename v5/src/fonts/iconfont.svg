@@ -1,0 +1,15 @@
+<?xml version="1.0" standalone="no"?> 
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<svg xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <font id="iconfont" horiz-adv-x="1024">
+    <font-face font-family="iconfont"
+      units-per-em="1024" ascent="1024"
+      descent="0" />
+    <missing-glyph horiz-adv-x="0" />
+    <glyph glyph-name="warning"
+      unicode="&#xE001;"
+      horiz-adv-x="1024" d=" M512 1024C229.7 1024 0 794.3 0 512S229.7 0 512 0C794.3 0 1024 229.7000000000001 1024 512S794.3 1024 512 1024zM512 113.8C292.4 113.8 113.8 292.5 113.8 512S292.4 910.2 512 910.2C731.6 910.2 910.2 731.6 910.2 512S731.6 113.8 512 113.8zM512 408.8L512 408.8C455.1 408.8 408.5 459.4 408.5 521.3V729.5C408.5 791.3 455.1 842 512 842L512 842C568.9 842 615.5 791.4 615.5 729.5V521.1C615.5 459.3 568.9 408.8 512 408.8zM512 377.9C570 377.9 617 330.9 617 272.9S570 167.9 512 167.9S407 214.9 407 272.9S454 377.9 512 377.9z" />
+  </font>
+</defs>
+</svg>
