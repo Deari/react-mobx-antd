@@ -159,6 +159,7 @@ const exportConfig = {
       '@/services': config.contextPath + '/services',
       '@/views': config.contextPath + '/views',
       '@/routes/_util': config.contextPath + '/routes/_util',
+      '@': config.contextPath,
     },
   },
   plugins: plugins,
