@@ -1,4 +1,4 @@
-import Container from '@/ui/Container'
+import { Container } from '@/business/Common/Container'
 import React from 'react'
 import './App.less'
 
